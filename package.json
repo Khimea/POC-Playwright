@@ -1,15 +1,22 @@
 {
-  "name": "poc-playwright",
+  "name": "playwright-js-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"npx playwright test"
+    "test": "npx cucumber-js --require ./steps/*.js --tags @login --publish",
+    "test:cucumber": "cucumber-js features/*.feature"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.26.1"
+    "@playwright/test": "^1.32.3",
+    "cucumber-html-reporter": "^6.0.0",
+    "playwright": "^1.32.3"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^8.11.1",
+    "dotenv": "^16.0.3"
   }
 }
