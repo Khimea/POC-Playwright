@@ -8,7 +8,7 @@ require('dotenv').config({
     path: path.join(__dirname, '../.env'),
 });
 Before(async () => {
-    let browser = await page.chromium.launch({headless: false, ignoreHTTPSErrors: true})
+    let browser = await page.chromium.launch({headless: true, ignoreHTTPSErrors: true})
     global.browser = browser
     const context = await browser.newContext({
         viewport: { width: 1920, height: 1080 } // Maximizing screen by setting viewport size
