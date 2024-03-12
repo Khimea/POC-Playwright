@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cucumber-js --require src/step_definitions/*.js --tags @login --publish",
-    "test:cucumber": "cucumber-js features/*.feature",
-    "test:reporter": "cucumber-js features/*.feature -f @cucumber/pretty-formatter -f json:output/TestReport_.json"
+    "test:cucumber": "cucumber-js Features/*.feature",
+    "test:reporter": "cucumber-js Features/*.feature -f @cucumber/pretty-formatter -f json:output/TestReport_.json"
   },
   "keywords": [],
   "author": "",
