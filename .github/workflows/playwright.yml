@@ -23,6 +23,6 @@ jobs:
     - name: Instalar Playwright
       run: npx playwright install
     - name: Run Playwright tests
-      run: npm run test:cucumber
+      run: npm run test
 
     # Aquí puedes agregar más pasos según lo que necesites, como ejecutar tus pruebas con Playwright
