@@ -1,9 +1,9 @@
 {
     "default":{
         "require": [
-            "steps/*.js",
+            "src/step_definitions/*.js",
             "page/*.js",
-            "Utility/*.js"
+            "support/*.js"
         ]
     }
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --require ./steps/*.js --tags @login --publish",
+    "test": "npx cucumber-js --require src/step_definitions/*.js --tags @login --publish",
     "test:cucumber": "cucumber-js features/*.feature"
   },
   "keywords": [],
@@ -16,7 +16,7 @@
     "playwright": "^1.32.3"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^8.11.1",
+    "@cucumber/cucumber": "^10.3.1",
     "dotenv": "^16.0.3"
   }
 }
