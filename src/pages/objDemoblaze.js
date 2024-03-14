@@ -1,7 +1,6 @@
 let demoblazeLocators = {
     Product :() => global.page.locator('.card-title'),
     addProductToCart :() => global.page.locator("#tbodyid > div.row > div > a"),
-    //homeBtn :() => global.page.locator('#navbarExample > ul > li.nav-item.active > a'),
     homeNavBar :() => global.page.locator('.nav-item'),
     cartBtn :() => global.page.locator('#navbarExample > ul > li:nth-child(4)'),
     verOrderCompra :() => global.page.locator('#page-wrapper > div > div.col-lg-1 > button'),

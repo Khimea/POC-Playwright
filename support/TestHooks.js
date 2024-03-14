@@ -1,33 +1,36 @@
 const {Before, AfterAll, After} = require('@cucumber/cucumber')
-const page = require('@playwright/test')
 let {setDefaultTimeout} = require('@cucumber/cucumber')
 const utils = require("./utils");
-
+const config = require("./browser.Config")
 const path = require('path');
 setDefaultTimeout(60 * 15000)
-const recordVideo = process.env.VIDEO || false ? true : false;
-const headless = process.env.HEADLESS || false ? true : false;
+
+
 require('dotenv').config({
     path: path.join(__dirname, '../.env'),
 });
-Before(async () => {
-    let browser = await page.chromium.launch({headless: headless, ignoreHTTPSErrors: true})
-    global.browser = browser
-    const context = await browser.newContext({
-        viewport: { width: 1920, height: 1080 },
-        recordVideo: recordVideo ? { dir: './videos/' } : undefined
 
-    })
-    global.page = await context.newPage()
-})
+
+
+Before(async () => {
+    let browser = await config.getBrowser();
+    global.browser = browser;
+    await config.configureContext(browser);
+});
 
 After(async (scenario) => {
-    await utils.takeScreenshot(scenario);
-  });
-
-  
-AfterAll(async () => {
+    let fileName = await utils.getNameFile(scenario)
+    await utils.takeScreenshot(fileName);
+    await global.page.close()
     if (global.browser) {
         await global.browser.close();
     }
-})
+    
+    await utils.saveVideo(fileName)
+    
+  });
+
+
+
+
+
