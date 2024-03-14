@@ -27,11 +27,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HEADLESS: true
-      VIDEO: ${{ github.event.inputs.VIDEO }}
-      SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
-      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
     steps:
     - name: Checkout del código
       uses: actions/checkout@v4
@@ -47,7 +42,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npm run test
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature
 
     - name: Guardar imagenes
       uses: actions/upload-artifact@v2
