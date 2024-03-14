@@ -51,6 +51,9 @@ jobs:
     - name: Instalar Playwright
       run: npx playwright install --with-deps
 
+    - name: Crear carpeta "screenshots"
+      run: mkdir -p screenshots
+      
     - name: Run Playwright tests
       run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
