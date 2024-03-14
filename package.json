@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env HEADLESS=true cucumber-js Features/*.feature",
+    "test": "cross-env HEADLESS=true VIDEO=true cucumber-js Features/*.feature",
     "test:cucumber": "cucumber-js Features/*.feature",
     "test:reporter": "cucumber-js Features/*.feature -f @cucumber/pretty-formatter -f json:output/TestReport_.json"
   },
