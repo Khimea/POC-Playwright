@@ -59,20 +59,20 @@ jobs:
       
     - name: Guardar imagenes
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: screenshots-${{ github.event.inputs.BROWSERS }}
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: videos-${{ github.event.inputs.BROWSERS }}
         path: ./videos
 
-    - name: Guardar Reporte
-      uses: actions/upload-artifact@v2
+    - name: Guardar Reporte html
+      uses: actions/upload-artifact@v4
       with:
         name: reporte-${{ github.event.inputs.BROWSERS }}
         path: ./output

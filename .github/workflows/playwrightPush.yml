@@ -24,6 +24,9 @@ jobs:
     - name: Instalar Playwright
       run: npx playwright install --with-deps
 
+    - name: Crear carpeta "screenshots"
+      run: mkdir -p screenshots
+      
     - name: Run Playwright tests
       run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json
    
@@ -42,7 +45,7 @@ jobs:
         name: videos-${{ matrix.browser }}
         path: ./videos
 
-    - name: Guardar Reporte
+    - name: Guardar Reporte html
       uses: actions/upload-artifact@v4
       with:
         name: reportes-${{ matrix.browser }}
