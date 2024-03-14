@@ -31,19 +31,19 @@ jobs:
       run: npm run reporte
 
     - name: Guardar imagenes
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: screenshots
         path: ./screenshots
 
     - name: Guardar Videos
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: videos
         path: ./videos
 
     - name: Guardar Reporte
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: reporte
         path: ./output
