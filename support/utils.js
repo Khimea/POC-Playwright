@@ -11,14 +11,14 @@ const getNameFile = async (scenario) => {
 }
 
 const takeScreenshot = async (nameFile) => {
-    const screenshotsDir = './screenshots';
-    try {
-        await fs.mkdir(screenshotsDir, { recursive: true }); 
-        const image = await global.page.screenshot(); 
-        await fs.writeFile(path.join(screenshotsDir, `${nameFile}.png`), image, 'base64');
-        console.log("Screenshot guardada: " + nameFile);
-    } catch (err) {
-        console.log(err);
+    if (screenshot) {
+        try {
+            let image = await global.page.screenshot();
+            await fs.promises.writeFile(`./screenshots/${nameFile}.png`, image, 'base64');
+            //console.log("Screenshot guardada: " + nameFile);
+        } catch (err) {
+            console.log(err);
+        }
     }
 };
 
@@ -33,6 +33,7 @@ const saveVideo = async (nameFile) => {
             console.error("Error al guardar el video:", error);
         }
     }
+
 };
 
 const getDate = () => {
@@ -42,17 +43,9 @@ const getDate = () => {
     return `${dia}_${hora}`;
 };
 
-const getDate2 = () => {
-    const date = new Date();
-    const dia = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-    const hora = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    return `${dia}_${hora}`;
-};
-
 module.exports = {
     takeScreenshot,
     getDate,
-    getDate2,
     getNameFile,
     saveVideo
 };

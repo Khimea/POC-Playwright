@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js Features/*.feature --format=json:output/report.json node generate-report.js",
-    "test:local": "cross-env HEADLESS=true VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json node generate-report.js node support/generate-report.js",
+    "test": "cucumber-js Features/*.feature --format=json:output/report.json && npm run generate-report",
+    "test:local": "cross-env HEADLESS=true VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json && npm run generate-report",
     "test:cucumber": "cucumber-js Features/*.feature",
-    "reporte":"node support/generate-report.js"
+    "generate-report": "node support/generateCucumberReport.js"
   },
   "keywords": [],
   "author": "",
