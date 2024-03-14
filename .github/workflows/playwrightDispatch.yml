@@ -28,63 +28,54 @@ on:
           - chromium
           - firefox
           - webkit
-          - todos
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        if: ${{ github.event.inputs.BROWSERS == 'todos' }}
-        browser: [chromium, firefox, webkit] : 
-          else: 
-          browser: ${{ github.event.inputs.BROWSERS}}
     env:
       HEADLESS: true
-      BROWSER_TYPE: ${{ matrix.browser }}
+      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
+    - name: Checkout del código
+      uses: actions/checkout@v4
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Instalar dependencias
+      run: npm install
+
+    - name: Instalar Playwright
+      run: npx playwright install --with-deps
+
+    - name: Crear carpeta "screenshots"
+      if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
+      run: mkdir -p screenshots
+
+    - name: Run Playwright tests
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+
+    - name: Generar reporte  
+      run: npm run generate-report
       
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
+    - name: Guardar imagenes
+      if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.inputs.BROWSERS }}-screenshots
+        path: ./screenshots
 
-      - name: Instalar dependencias
-        run: npm install
+    - name: Guardar Videos
+      if: ${{ github.event.inputs.VIDEO == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.inputs.BROWSERS }}-videos
+        path: ./videos
 
-      - name: Instalar Playwright
-        run: npx playwright install --with-deps
-
-      - name: Crear carpeta "screenshots"
-        if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
-        run: mkdir -p screenshots
-
-      - name: Run Playwright tests
-        run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report-${{ matrix.browser }}.json
-
-      - name: Generar reporte  
-        run: npm run generate-report
-        
-      - name: Guardar imagenes
-        if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: ./screenshots
-
-      - name: Guardar Videos
-        if: ${{ github.event.inputs.VIDEO == 'true' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: videos
-          path: ./videos
-
-      - name: Guardar Reporte html
-        uses: actions/upload-artifact@v4
-        with:
-          name: reporte
-          path: ./output
+    - name: Guardar Reporte html
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.inputs.BROWSERS }}-reporte
+        path: ./output
