@@ -1,4 +1,4 @@
-name: Test con Playwright
+name: Test Regression on-push
 
 on:
   push:
@@ -45,5 +45,5 @@ jobs:
     - name: Guardar Reporte
       uses: actions/upload-artifact@v4
       with:
-        name: reporte
+        name: reportes
         path: ./output

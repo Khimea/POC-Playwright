@@ -1,4 +1,4 @@
-name: Test con Playwright
+name: Test Regression on-demand
 
 on:
   workflow_dispatch:
