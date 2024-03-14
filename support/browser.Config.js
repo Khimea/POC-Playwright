@@ -12,7 +12,9 @@ const getBrowser = async () => {
 };
 
 const configureContext = async (browser) => {
-    let contextOptions = {};
+    let contextOptions = {
+        viewport: { width: 1920, height: 1080 }
+    };
     if (recordVideo) {
         contextOptions.recordVideo = { dir: './videos/' };
     }
