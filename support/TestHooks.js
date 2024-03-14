@@ -1,22 +1,18 @@
-const {Before, AfterAll, After} = require('@cucumber/cucumber')
-let {setDefaultTimeout} = require('@cucumber/cucumber')
+const { Before, AfterAll, After } = require('@cucumber/cucumber')
+let { setDefaultTimeout } = require('@cucumber/cucumber')
 const utils = require("./utils");
 const config = require("./browser.Config")
 const path = require('path');
 setDefaultTimeout(60 * 15000)
 
-
 require('dotenv').config({
     path: path.join(__dirname, '../.env'),
 });
 
-
-
 Before(async () => {
-    console.log("Video: " + process.env.VIDEO );
-    console.log("Scheenshot: " + process.env.SCREENSHOT );
-    console.log("Video: " + process.env.VIDEO );
-    console.log("Browser: "+ process.env.BROWSER_TYPE);
+    console.log("Video: " + process.env.VIDEO);
+    console.log("Scheenshot: " + process.env.SCREENSHOT);
+    console.log("Browser: " + process.env.BROWSER_TYPE);
     console.log("Headless: " + process.env.HEADLESS);
     let browser = await config.getBrowser();
     global.browser = browser;
@@ -30,10 +26,8 @@ After(async (scenario) => {
     if (global.browser) {
         await global.browser.close();
     }
-    
     await utils.saveVideo(fileName)
-    
-  });
+});
 
 
 

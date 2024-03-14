@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js Features/*.feature",
-    "test:local": "cross-env HEADLESS=false VIDEO=false SCREENSHOT=false cucumber-js Features/*.feature",
-    "test:cucumber": "cucumber-js Features/*.feature",
-    "test:reporter": "cucumber-js Features/*.feature -f @cucumber/pretty-formatter -f json:output/TestReport_.json"
+    "test": "cucumber-js Features/*.feature --format=json:output/report.json node generate-report.js",
+    "test:local": "cross-env HEADLESS=true VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature",
+    "test:cucumber": "cucumber-js Features/*.feature"
   },
   "keywords": [],
   "author": "",
@@ -15,12 +14,11 @@
   "devDependencies": {
     "@playwright/test": "^1.32.3",
     "cross-env": "^7.0.3",
-    "cucumber-html-reporter": "^6.0.0",
+    "cucumber-html-reporter": "^7.1.1",
     "dotenv": "^16.4.5",
     "playwright": "^1.32.3"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^10.3.1",
-    "@cucumber/pretty-formatter": "^1.0.0"
+    "@cucumber/cucumber": "^10.3.1"
   }
 }

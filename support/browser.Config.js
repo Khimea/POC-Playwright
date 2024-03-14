@@ -18,11 +18,9 @@ const configureContext = async (browser) => {
     if (recordVideo) {
         contextOptions.recordVideo = { dir: './videos/' };
     }
-    
     let context = await browser.newContext(contextOptions);
     global.page = await context.newPage();
 };
-
 
 module.exports = {
     getBrowser,
