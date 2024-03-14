@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cucumber-js Features/*.feature --format=json:output/report.json node generate-report.js",
     "test:local": "cross-env HEADLESS=true VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature",
-    "test:cucumber": "cucumber-js Features/*.feature"
+    "test:cucumber": "cucumber-js Features/*.feature",
+    "reporte":"node generate-report.js"
   },
   "keywords": [],
   "author": "",

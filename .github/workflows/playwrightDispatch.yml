@@ -55,7 +55,7 @@ jobs:
       run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
-      run: node generate-report.js
+      run: npm run reporte
       
     - name: Guardar imagenes
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
