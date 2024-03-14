@@ -1,9 +1,6 @@
 name: Test con Playwright
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       VIDEO:
