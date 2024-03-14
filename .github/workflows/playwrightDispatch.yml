@@ -35,7 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: ${{ github.event.inputs.BROWSERS == 'todos' && 'chromium,firefox,webkit' || github.event.inputs.BROWSERS }}
+        if: ${{ github.event.inputs.BROWSERS == 'todos' }}
+        browser: [chromium, firefox, webkit] : 
+          else: 
+          browser: ${{ github.event.inputs.BROWSERS}}
     env:
       HEADLESS: true
       BROWSER_TYPE: ${{ matrix.browser }}
