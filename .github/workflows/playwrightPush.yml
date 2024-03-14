@@ -33,17 +33,17 @@ jobs:
     - name: Guardar imagenes
       uses: actions/upload-artifact@v4
       with:
-        name: screenshots
+        name: screenshots-${{ matrix.browser }}
         path: ./screenshots
 
     - name: Guardar Videos
       uses: actions/upload-artifact@v4
       with:
-        name: videos
+        name: videos-${{ matrix.browser }}
         path: ./videos
 
     - name: Guardar Reporte
       uses: actions/upload-artifact@v4
       with:
-        name: reportes
+        name: reportes-${{ matrix.browser }}
         path: ./output

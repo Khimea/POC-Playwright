@@ -61,18 +61,18 @@ jobs:
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v2
       with:
-        name: screenshots
+        name: screenshots-${{ github.event.inputs.BROWSERS }}
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v2
       with:
-        name: videos
+        name: videos-${{ github.event.inputs.BROWSERS }}
         path: ./videos
 
     - name: Guardar Reporte
       uses: actions/upload-artifact@v2
       with:
-        name: reporte
+        name: reporte-${{ github.event.inputs.BROWSERS }}
         path: ./output
