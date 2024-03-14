@@ -1,4 +1,4 @@
-name: Test Regression on-push
+name: Test Regression on-pussh
 
 on:
   push:

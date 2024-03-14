@@ -1,4 +1,4 @@
-name: Test Regression on-demand
+name: Test Regression on-demandd
 
 on:
   workflow_dispatch:
