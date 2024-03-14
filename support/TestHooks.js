@@ -13,6 +13,10 @@ require('dotenv').config({
 
 
 Before(async () => {
+    console.log("Video: " + process.env.VIDEO );
+    console.log("Scheenshot: " + process.env.SCREENSHOT );
+    console.log("Video: " + process.env.VIDEO );
+    console.log("Browser: "+ process.env.BROWSER_TYPE);
     let browser = await config.getBrowser();
     global.browser = browser;
     await config.configureContext(browser);

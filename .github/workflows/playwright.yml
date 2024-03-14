@@ -47,7 +47,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: cross-env HEADLESS=HEADLESS VIDEO=VIDEO SCREENSHOT=SCREENSHOT BROWSER_TYPE=BROWSER_TYPE npm run test
+      run: npm run test
 
     - name: Guardar imagenes
       uses: actions/upload-artifact@v2
