@@ -9,15 +9,15 @@ on:
       VIDEO:
         description: '¿Grabar video?'
         required: true
-        default: 'false'
+        default: 'true'
       SCREENSHOT:
         description: '¿Tomar capturas de pantalla?'
         required: true
-        default: 'false'
+        default: 'true'
       BROWSERS:
         description: 'Selecciona el navegador(es) en el que deseas ejecutar las pruebas'
         required: true
-        default: chromium
+        default: 'chromium'
         type: choice
         options: 
           - chromium
@@ -27,6 +27,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      HEADLESS: true
+      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
+      VIDEO: ${{ github.event.inputs.VIDEO }}
+      SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
     - name: Checkout del código
       uses: actions/checkout@v4
