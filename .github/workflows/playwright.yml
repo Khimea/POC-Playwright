@@ -10,10 +10,18 @@ on:
         description: '¿Grabar video?'
         required: true
         default: 'true'
+        type: choice
+        options: 
+          - true
+          - false
       SCREENSHOT:
         description: '¿Tomar capturas de pantalla?'
         required: true
         default: 'true'
+        type: choice
+        options: 
+          - true
+          - false
       BROWSERS:
         description: 'Selecciona el navegador(es) en el que deseas ejecutar las pruebas'
         required: true
@@ -50,12 +58,14 @@ jobs:
       run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature
 
     - name: Guardar imagenes
+      if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: screenshots
         path: ./screenshots
 
     - name: Guardar Videos
+      if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: videos
