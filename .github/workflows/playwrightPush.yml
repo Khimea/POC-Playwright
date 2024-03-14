@@ -25,8 +25,11 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json node generate-report.js
-
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json
+   
+    - name: Generar reporte  
+      run: node generate-report.js
+      
     - name: Guardar imagenes
       uses: actions/upload-artifact@v2
       with:
