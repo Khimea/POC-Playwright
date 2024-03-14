@@ -31,7 +31,7 @@ jobs:
       HEADLESS: true
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
-      BROWSERS: ${{ github.event.inputs.BROWSERS }}
+      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
     steps:
     - name: Checkout del código
       uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npm run test
+      run: cross-env HEADLESS=HEADLESS VIDEO=VIDEO SCREENSHOT=SCREENSHOT BROWSER_TYPE=BROWSER_TYPE npm run test
 
     - name: Guardar imagenes
       uses: actions/upload-artifact@v2

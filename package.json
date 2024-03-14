@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js Features/*.feature",
-    "test:local": "cross-env HEADLESS=false VIDEO=false SCREENSHOT=true cucumber-js Features/*.feature",
+    "test:local": "cross-env HEADLESS=false VIDEO=false SCREENSHOT=false cucumber-js Features/*.feature",
     "test:cucumber": "cucumber-js Features/*.feature",
     "test:reporter": "cucumber-js Features/*.feature -f @cucumber/pretty-formatter -f json:output/TestReport_.json"
   },
