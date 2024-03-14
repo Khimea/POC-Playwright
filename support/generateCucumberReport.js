@@ -1,7 +1,10 @@
 const fs = require('fs');
 const cucumberHtmlReporter = require('cucumber-html-reporter');
+const reportName = require('./utils').getDate()
+
+function generateCucumberReport() {
     const jsonFile = './output/report.json';
-    const htmlFile = './output/report.html';
+    const htmlFile = `./output/${reportName}.html`;
     const options = {
         theme: 'bootstrap',
         jsonFile: jsonFile,
@@ -20,6 +23,7 @@ const cucumberHtmlReporter = require('cucumber-html-reporter');
 
     if (fs.existsSync(jsonFile)) {
         cucumberHtmlReporter.generate(options);
-        console.error('Reporte generado');
     }
+}
 
+module.exports = generateCucumberReport();

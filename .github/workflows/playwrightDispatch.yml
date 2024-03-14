@@ -53,7 +53,7 @@ jobs:
 
     - name: Crear carpeta "screenshots"
       run: mkdir -p screenshots
-      
+
     - name: Run Playwright tests
       run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
@@ -64,18 +64,18 @@ jobs:
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: screenshots-${{ github.event.inputs.BROWSERS }}
+        name: ${{ github.event.inputs.BROWSERS }}-screenshots
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: videos-${{ github.event.inputs.BROWSERS }}
+        name: ${{ github.event.inputs.BROWSERS }}-videos
         path: ./videos
 
     - name: Guardar Reporte html
       uses: actions/upload-artifact@v4
       with:
-        name: reporte-${{ github.event.inputs.BROWSERS }}
+        name: ${{ github.event.inputs.BROWSERS }}-reporte
         path: ./output
