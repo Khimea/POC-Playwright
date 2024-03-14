@@ -21,9 +21,21 @@ jobs:
         node-version: '20'
     - name: Instalar dependencias
       run: npm install
-      
+
     - name: Instalar Playwright
       run: npx playwright install
 
     - name: Run Playwright tests
       run: npm run test
+
+    - name: Guardar imagenes
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: ./screenshots
+
+    - name: Guardar Videos
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: ./videos
