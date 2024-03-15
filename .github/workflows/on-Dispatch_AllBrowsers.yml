@@ -1,4 +1,4 @@
-name: Test Regression on-demand
+name: Test Regression on-demand All Browsers
 
 on:
   workflow_dispatch:
