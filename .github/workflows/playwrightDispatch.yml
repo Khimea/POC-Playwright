@@ -28,12 +28,17 @@ on:
           - chromium
           - firefox
           - webkit
+          - chromium, firefox, webkit # Esta es la nueva opción
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browsers:
+          - ${{ github.event.inputs.BROWSERS }}
     env:
       HEADLESS: true
-      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
+      BROWSER_TYPE: ${{ matrix.browsers }}
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
@@ -55,7 +60,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browsers }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report
@@ -64,18 +69,18 @@ jobs:
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-screenshots
+        name: ${{ matrix.browsers }}-screenshots
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-videos
+        name: ${{ matrix.browsers }}-videos
         path: ./videos
 
     - name: Guardar Reporte html
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-reporte
+        name: ${{ matrix.browsers }}-reporte
         path: ./output
