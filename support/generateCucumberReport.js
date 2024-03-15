@@ -14,7 +14,7 @@ function generateCucumberReport() {
         metadata: {
             "App Version": "1.0.0",
             "Test Environment": "STAGING",
-            "Browser": "Chrome 97.0.4692.99",
+            "Browser": process.env.BROWSER_TYPE,
             "Platform": "Windows 10",
             "Parallel": "Scenarios",
             "Executed": "Remote"

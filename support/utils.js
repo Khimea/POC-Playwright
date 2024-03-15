@@ -33,7 +33,6 @@ const saveVideo = async (nameFile) => {
             console.error("Error al guardar el video:", error);
         }
     }
-
 };
 
 const getDate = () => {

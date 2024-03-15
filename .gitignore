@@ -2,3 +2,6 @@
 /node_modules
 package-lock.json
 output/TestReport_$(npm
+/output
+*.png
+/videos
