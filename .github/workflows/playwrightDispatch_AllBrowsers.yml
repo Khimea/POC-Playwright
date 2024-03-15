@@ -19,21 +19,15 @@ on:
         options: 
           - true
           - false
-      BROWSERS:
-        description: 'Selecciona el navegador(es) en el que deseas ejecutar las pruebas'
-        required: true
-        default: 'chromium'
-        type: choice
-        options: 
-          - chromium
-          - firefox
-          - webkit
 jobs:
   build:
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
     runs-on: ubuntu-latest
     env:
       HEADLESS: true
-      BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
+      BROWSER_TYPE: ${{ matrix.browser }} 
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
@@ -55,7 +49,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report
@@ -64,18 +58,18 @@ jobs:
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-screenshots
+        name: ${{ matrix.browser }}-screenshots
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-videos
+        name: ${{ matrix.browser }}-videos
         path: ./videos
 
     - name: Guardar Reporte html
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.inputs.BROWSERS }}-reporte
+        name: ${{ matrix.browser }}-reporte
         path: ./output
