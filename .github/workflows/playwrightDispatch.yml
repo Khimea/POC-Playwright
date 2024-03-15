@@ -28,14 +28,14 @@ on:
           - chromium
           - firefox
           - webkit
-          - '[chromium, firefox, webkit]' # Esta es la nueva opción
+          - todos
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browsers:
-          - ${{ github.event.inputs.BROWSERS }}]
+        browsers: ${{ github.event.inputs.BROWSERS == 'todos' && 'chromium, firefox, webkit' || github.event.inputs.BROWSERS }}
+
     env:
       HEADLESS: true
       BROWSER_TYPE: ${{ matrix.browsers }}
