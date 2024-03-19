@@ -1,10 +1,10 @@
 # POC-Playwright
 
-Este repositorio contiene una prueba de concepto (PoC) para el uso de Playwright en proyectos de automatización de pruebas.
+Este repositorio contiene una prueba de concepto (PoC) para el uso de Playwright en proyectos de automatización de pruebas, utilizando Cucumber y Node.js.
 
 ## Descripción
 
-Este proyecto se centra en explorar las capacidades de Playwright, un marco de automatización de pruebas moderno para navegadores web. La PoC incluye ejemplos básicos de escritura de pruebas utilizando Playwright para interactuar con navegadores como Chrome, Firefox y WebKit.
+Este proyecto se centra en explorar las capacidades de Playwright, un marco de automatización de pruebas moderno para navegadores web. La PoC incluye ejemplos básicos de escritura de pruebas utilizando Playwright para interactuar con navegadores como Chrome, Firefox y WebKit, junto con Cucumber para escribir pruebas en lenguaje natural.
 
 ## Instalación
 
@@ -49,6 +49,3 @@ Si tienes alguna pregunta o encuentras algún problema, no dudes en abrir un iss
 ## Licencia
 
 Este proyecto está bajo la Licencia [MIT](https://opensource.org/licenses/MIT).
-
-
-Por favor, asegúrate de ajustar la información según sea necesario. Si necesitas más cambios o detalles adicionales, no dudes en decirme.
