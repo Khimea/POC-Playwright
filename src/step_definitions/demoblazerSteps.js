@@ -1,6 +1,7 @@
-const { When, Then } = require('@cucumber/cucumber')
+const { Given, When, Then } = require('@cucumber/cucumber')
 const  demoblaze = require('../pages/DemoblazePage')
-When('Dirigirse a demoblaze website', async () => {
+
+Given('Dirigirse a demoblaze website', async () => {
     await demoblaze.navigate()
 });
 When(/^Seleccionar producto (.*)$/, async function (product) {

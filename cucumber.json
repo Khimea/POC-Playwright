@@ -1,5 +1,6 @@
 {
     "default":{
+        "failFast": false,
         "require": [
             "src/step_definitions/*.js",
             "page/*.js",
