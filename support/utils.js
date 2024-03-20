@@ -1,8 +1,8 @@
 var fs = require("fs");
 const path = require('path');
 
-const recordVideo = process.env.VIDEO === 'false' ? false : true;
-const screenshot = process.env.SCREENSHOT === 'false' ? false : true;
+const recordVideo = process.env.VIDEO === 'true' ? true : false;
+const screenshot = process.env.SCREENSHOT === 'true' ? true : false;
 
 const getNameFile = async (scenario) => {
     let { name: scenarioName } = scenario.pickle;

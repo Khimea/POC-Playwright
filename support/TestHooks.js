@@ -10,10 +10,6 @@ require('dotenv').config({
 });
 
 Before(async () => {
-    console.log("Video: " + process.env.VIDEO);
-    console.log("Scheenshot: " + process.env.SCREENSHOT);
-    console.log("Browser: " + process.env.BROWSER_TYPE);
-    console.log("Headless: " + process.env.HEADLESS);
     let browser = await config.getBrowser();
     global.browser = browser;
     await config.configureContext(browser);

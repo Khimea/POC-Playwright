@@ -19,8 +19,9 @@ When(/^Visualizar carrito$/, async function () {
 When(/^Crear orden de compra$/, async function () {
     await demoblaze.createOrdenBuy()
 });
-When(/^Completar formulario compra$/, async function () {
-    await demoblaze.fillFormBuy()
+When(/^Completar formulario compra con el json: (.*)$/, async function (json) {
+    let data = require("../../data/"+ json+".json")
+    await demoblaze.fillFormBuy(data)
 });
 When(/^Comprar orden$/, async function () {
     await demoblaze.completeBuy()

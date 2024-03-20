@@ -1,6 +1,5 @@
-const {expect} = require('@playwright/test');
-const {test} = require("playwright/test");
-const {waitForDialog} = require('@playwright/test');
+const { expect } = require('@playwright/test');
+const { waitForDialog } = require('@playwright/test');
 const assert = require('node:assert').strict
 
 
@@ -12,8 +11,8 @@ class PageDemoblaze {
         await global.page.goto(process.env.WEB_URL,)
     }
 
-    clickProduct = async (productName) => {
-        await elements.Product().filter({hasText: productName}).click()
+    async clickProduct(productName) {
+        await elements.cardProduct().filter({ hasText: productName }).click()
     };
 
     async addToCart() {
@@ -24,32 +23,55 @@ class PageDemoblaze {
         }
     }
 
-    clickHome = async (homeName) => {
-        await elements.homeNavBar().filter({hasText: homeName}).click()
+    async clickHome(homeName) {
+        await elements.homeNavBar().filter({ hasText: homeName }).click()
     };
 
     async visualize() {
-        await elements.cartBtn().click()
+        await elements.btnCart().click()
     }
 
     async createOrdenBuy() {
         await elements.verOrderCompra().click()
     }
 
-    async fillFormBuy() {
+    async typeName(data) {
+        await elements.inputName().isVisible()
+        await elements.inputName().fill(data)
+    }
 
+    async typeCountry(data) {
+        await elements.inputCountry().fill(data);
+    }
+
+    async typeCity(data) {
+        await elements.inputCity().fill(data);
+    }
+
+    async typeCard(data) {
+        await elements.inputCard().fill(data);
+    }
+
+    async typeMonth(data) {
+        await elements.inputMonth().fill(data);
+    }
+
+    async typeYear(data) {
+        await elements.inputYear().fill(data);
+    }
+
+    fillFormBuy = async (json) => {
         await page.waitForURL('**/cart.html');
-        await elements.nameInput().isVisible()
-        await elements.nameInput().fill('Test')
-        await elements.countryInput().fill('Test');
-        await elements.cityInput().fill('test');
-        await elements.cardInput().fill('1234 1234 1234 1234');
-        await elements.monthInput().fill('11');
-        await elements.yearInput().fill('2028');
+        await this.typeName(json.name);
+        await this.typeCountry(json.country);
+        await this.typeCity(json.city);
+        await this.typeCard(json.card);
+        await this.typeMonth(json.month);
+        await this.typeYear(json.year);
     }
 
     async completeBuy() {
-        await elements.buyBtn().click()
+        await elements.btnBuy().click()
     }
 
     async validateBuy() {
@@ -57,7 +79,7 @@ class PageDemoblaze {
     }
 
     async getText() {
-        return await elements.validateBuyLbl().textContent()
+        return await elements.lblValidateBuy().textContent()
     }
 }
 
