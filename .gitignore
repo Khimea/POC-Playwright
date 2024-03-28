@@ -5,3 +5,8 @@ output/TestReport_$(npm
 /output
 *.png
 /videos
+.idea/libraries/cache.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/POC-Playwright.iml
+.idea/vcs.xml
