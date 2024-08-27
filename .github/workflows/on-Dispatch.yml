@@ -28,11 +28,23 @@ on:
           - chromium
           - firefox
           - webkit
+      DEVICES:
+        description: 'Selecciona el navegador(es) en el que deseas ejecutar las pruebas'
+        required: true
+        default: 'chromium'
+        type: choice
+        options: 
+          - chromium
+          - firefox
+          - webkit
+          - Mobile Chrome
+          - Mobile Safari
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       HEADLESS: true
+      DEVICE: ${{ github.event.inputs.DEVICES }}
       BROWSER_TYPE: ${{ github.event.inputs.BROWSERS }}
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
@@ -55,7 +67,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true DEVICE=${{ github.event.inputs.DEVICES }} BROWSER_TYPE=${{ github.event.inputs.BROWSERS }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report

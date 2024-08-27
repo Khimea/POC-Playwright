@@ -1,21 +1,21 @@
-const page = require('@playwright/test')
+
+const path = require('path');
 const headless = process.env.HEADLESS === 'true' ? true : false;
 const recordVideo = process.env.VIDEO === 'true' ? true : false;
+const browserType = process.env.BROWSER_TYPE || 'chromium';
+const device = process.env.DEVICE || 'chromium';
+const config = require('../playwright.config');
 
 const getBrowser = async () => {
-    let browserType = process.env.BROWSER_TYPE || 'chromium';
-    let launchOptions = { headless: headless};
-    if (!page[browserType] || typeof page[browserType].launch !== 'function') {
-        throw new Error(`Tipo de navegador no compatible: ${browserType}`);
-    }
-    return await page[browserType].launch(launchOptions);
+    const browser = await require('@playwright/test')[browserType].launch({
+        headless: headless,
+    });
+    return browser;
 };
 
-const configureContext = async (browser) => {
-    let contextOptions = {
-        viewport: { width: 1920, height: 1080 },
-        ignoreHTTPSErrors: true 
-    };
+const configureContext = async () => {
+    let contextOptions = config.projects.find(project => project.name === device)?.use || {};
+    contextOptions.ignoreHTTPSErrors = true;
     if (recordVideo) {
         contextOptions.recordVideo = { dir: './videos/' };
     }

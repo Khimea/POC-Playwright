@@ -1,6 +1,12 @@
 let demoblazeLocators = {
     cardProduct :() => page.locator('.card-title'),
     addProductToCart :() => page.locator("#tbodyid > div.row > div > a"),
+    "formulario1":{
+        cardProduct :() => page.locator('.card-title'),
+    },
+    "formulario2":{
+        cardProduct :() => page.locator('.card-title'),
+    },
     homeNavBar :() => page.locator('.nav-item'),
     btnCart :() => page.locator('#navbarExample > ul > li:nth-child(4)'),
     verOrderCompra :() => page.locator('#page-wrapper > div > div.col-lg-1 > button'),

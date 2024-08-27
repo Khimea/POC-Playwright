@@ -24,10 +24,12 @@ jobs:
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
+        device: [chromium, firefox, webkit, Mobile Chrome, Mobile Safari]
     runs-on: ubuntu-latest
     env:
       HEADLESS: true
       BROWSER_TYPE: ${{ matrix.browser }} 
+      DEVICE: ${{ matrix.device }}
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
@@ -49,7 +51,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true DEVICE=${{ matrix.device }} BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report
@@ -58,18 +60,18 @@ jobs:
       if: ${{ github.event.inputs.SCREENSHOT == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.browser }}-screenshots
+        name: ${{ matrix.browser }}-${{ matrix.device }}-screenshots
         path: ./screenshots
 
     - name: Guardar Videos
       if: ${{ github.event.inputs.VIDEO == 'true' }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.browser }}-videos
+        name: ${{ matrix.browser }}-${{ matrix.device }}-videos
         path: ./videos
 
     - name: Guardar Reporte html
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.browser }}-reporte
+        name: ${{ matrix.browser }}-${{ matrix.device }}-reporte
         path: ./output

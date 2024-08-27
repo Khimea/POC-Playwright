@@ -48,7 +48,8 @@ module.exports = defineConfig({
         {
             name: 'chromium',
             use: {
-                ...devices['Desktop Chrome']
+                ...devices['Desktop Chrome'],
+                viewport: { width: 1920, height: 1080 },
             },
         },
 
@@ -63,14 +64,17 @@ module.exports = defineConfig({
         },
 
         /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: { ...devices['Pixel 5'] },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: { ...devices['iPhone 12'] },
-        // },
+         {
+           name: 'Mobile Chrome',
+           use: { ...devices['Pixel 5'],
+                    isMobile: true },
+         },
+         {
+           name: 'Mobile Safari',
+           use: { ...devices['iPhone 12'],
+            isMobile: true
+            },
+        },
 
         /* Test against branded browsers. */
         // {

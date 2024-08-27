@@ -4,7 +4,7 @@ const assert = require('node:assert').strict
 
 
 const elements = require("./objDemoblaze").demoblazeLocators
-
+const formulario = elements.formulario1
 
 class PageDemoblaze {
     async navigate() {
