@@ -19,10 +19,11 @@ on:
         options: 
           - true
           - false
+
       DEVICES:
         description: 'Selecciona el navegador(es) en el que deseas ejecutar las pruebas'
         required: true
-        default: 'chromium'
+        default: 'MobileChrome'
         type: choice
         options: 
           - MobileChrome
@@ -54,7 +55,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true DEVICE=${{ github.event.inputs.DEVICES }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true MOBILE=true DEVICE=${{ github.event.inputs.DEVICES }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report

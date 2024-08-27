@@ -24,12 +24,10 @@ jobs:
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
-        device: [chromium, firefox, webkit, MobileChrome, MobileSafari]
     runs-on: ubuntu-latest
     env:
       HEADLESS: true
       BROWSER_TYPE: ${{ matrix.browser }} 
-      DEVICE: ${{ matrix.device }}
       VIDEO: ${{ github.event.inputs.VIDEO }}
       SCREENSHOT: ${{ github.event.inputs.SCREENSHOT }}
     steps:
@@ -51,7 +49,7 @@ jobs:
       run: mkdir -p screenshots
 
     - name: Run Playwright tests
-      run: npx cross-env HEADLESS=true DEVICE=${{ matrix.device }} BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
+      run: npx cross-env HEADLESS=true BROWSER_TYPE=${{ matrix.browser }} VIDEO=${{ github.event.inputs.VIDEO }} SCREENSHOT=${{ github.event.inputs.SCREENSHOT }} cucumber-js Features/*.feature --format=json:output/report.json
 
     - name: Generar reporte  
       run: npm run generate-report
