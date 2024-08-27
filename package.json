@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js Features/*.feature --format=json:output/report.json && npm run generate-report",
-    "test:local": "cross-env HEADLESS=true VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json && npm run generate-report",
+    "test:local": "cross-env HEADLESS=true DEVICE=MobileChrome VIDEO=true SCREENSHOT=true cucumber-js Features/*.feature --format=json:output/report.json && npm run generate-report",
     "test:cucumber": "cucumber-js Features/*.feature",
     "generate-report": "node support/generateCucumberReport.js"
   },

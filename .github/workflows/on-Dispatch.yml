@@ -37,8 +37,8 @@ on:
           - chromium
           - firefox
           - webkit
-          - Mobile Chrome
-          - Mobile Safari
+          - MobileChrome
+          - MobileSafari
 jobs:
   build:
     runs-on: ubuntu-latest

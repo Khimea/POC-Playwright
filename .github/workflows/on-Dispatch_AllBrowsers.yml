@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
-        device: [chromium, firefox, webkit, Mobile Chrome, Mobile Safari]
+        device: [chromium, firefox, webkit, MobileChrome, MobileSafari]
     runs-on: ubuntu-latest
     env:
       HEADLESS: true
